@@ -436,7 +436,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: White
+  m_Text: Red
 --- !u!222 &458668862
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1142,7 +1142,7 @@ GameObject:
   - component: {fileID: 1402193738}
   - component: {fileID: 1402193739}
   m_Layer: 5
-  m_Name: Toggle White
+  m_Name: Toggle Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1866,7 +1866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019527339}
   m_LocalRotation: {x: 0.40821794, y: -0.23456973, z: 0.109381676, w: 0.87542605}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 300, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2066,6 +2066,6 @@ MonoBehaviour:
   colors:
   - {r: 1, g: 0.862, b: 0, a: 1}
   - {r: 0.005028119, g: 0.6838235, b: 0.031501163, a: 1}
-  - {r: 0.07396196, g: 0.21853216, b: 0.83823526, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.1745283, g: 0.29686305, b: 1, a: 1}
+  - {r: 0.98039216, g: 0.2627451, b: 0.34418684, a: 1}
   hexGrid: {fileID: 1571186511}
