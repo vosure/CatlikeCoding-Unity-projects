@@ -1,10 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum HexEdgeType
+﻿public enum HexEdgeType
 {
-    Flat,
-    Slope,
-    Cliff
+    Flat, Slope, Cliff
 }

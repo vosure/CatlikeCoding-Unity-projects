@@ -3,6 +3,7 @@
 [System.Serializable]
 public struct HexCoordinates
 {
+
     [SerializeField]
     private int x, z;
 
@@ -75,7 +76,8 @@ public struct HexCoordinates
 
     public override string ToString()
     {
-        return "(" + X.ToString() + ", " + Y.ToString() + ", " + Z.ToString() + ")";
+        return "(" +
+            X.ToString() + ", " + Y.ToString() + ", " + Z.ToString() + ")";
     }
 
     public string ToStringOnSeparateLines()

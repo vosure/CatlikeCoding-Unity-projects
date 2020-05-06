@@ -4,31 +4,63 @@ using UnityEngine.EventSystems;
 public class HexMapEditor : MonoBehaviour
 {
 
-    enum OptionalToggle
-    {
-        Ignore,
-        Yes,
-        No
-    }
-
     public Color[] colors;
 
     public HexGrid hexGrid;
 
-    private Color activeColor;
-    private int activeElevation;
+    int activeElevation;
 
-    private bool applyColor;
-    private bool applyElevation = true;
+    Color activeColor;
 
-    private int brushSize;
+    int brushSize;
 
-    private OptionalToggle riverMode;
+    bool applyColor;
+    bool applyElevation = true;
 
-    private bool isDrag;
-    private HexDirection dragDirection;
+    enum OptionalToggle
+    {
+        Ignore, Yes, No
+    }
+
+    OptionalToggle riverMode;
+
+    bool isDrag;
+    HexDirection dragDirection;
     HexCell previousCell;
 
+    public void SelectColor(int index)
+    {
+        applyColor = index >= 0;
+        if (applyColor)
+        {
+            activeColor = colors[index];
+        }
+    }
+
+    public void SetApplyElevation(bool toggle)
+    {
+        applyElevation = toggle;
+    }
+
+    public void SetElevation(float elevation)
+    {
+        activeElevation = (int)elevation;
+    }
+
+    public void SetBrushSize(float size)
+    {
+        brushSize = (int)size;
+    }
+
+    public void SetRiverMode(int mode)
+    {
+        riverMode = (OptionalToggle)mode;
+    }
+
+    public void ShowUI(bool visible)
+    {
+        hexGrid.ShowUI(visible);
+    }
 
     void Awake()
     {
@@ -37,7 +69,10 @@ public class HexMapEditor : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (
+            Input.GetMouseButton(0) &&
+            !EventSystem.current.IsPointerOverGameObject()
+        )
         {
             HandleInput();
         }
@@ -54,7 +89,6 @@ public class HexMapEditor : MonoBehaviour
         if (Physics.Raycast(inputRay, out hit))
         {
             HexCell currentCell = hexGrid.GetCell(hit.point);
-            EditCells(currentCell);
             if (previousCell && previousCell != currentCell)
             {
                 ValidateDrag(currentCell);
@@ -63,6 +97,7 @@ public class HexMapEditor : MonoBehaviour
             {
                 isDrag = false;
             }
+            EditCells(currentCell);
             previousCell = currentCell;
         }
         else
@@ -73,7 +108,11 @@ public class HexMapEditor : MonoBehaviour
 
     void ValidateDrag(HexCell currentCell)
     {
-        for (dragDirection = HexDirection.NE; dragDirection <= HexDirection.NW; dragDirection++)
+        for (
+            dragDirection = HexDirection.NE;
+            dragDirection <= HexDirection.NW;
+            dragDirection++
+        )
         {
             if (previousCell.GetNeighbor(dragDirection) == currentCell)
             {
@@ -96,7 +135,6 @@ public class HexMapEditor : MonoBehaviour
                 EditCell(hexGrid.GetCell(new HexCoordinates(x, z)));
             }
         }
-
         for (int r = 0, z = centerZ + brushSize; z > centerZ; z--, r++)
         {
             for (int x = centerX - brushSize; x <= centerX + r; x++)
@@ -110,7 +148,6 @@ public class HexMapEditor : MonoBehaviour
     {
         if (cell)
         {
-
             if (applyColor)
             {
                 cell.Color = activeColor;
@@ -132,39 +169,5 @@ public class HexMapEditor : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void SetElevation(float elevation)
-    {
-        activeElevation = (int)elevation;
-    }
-
-    public void SelectColor(int index)
-    {
-        applyColor = index >= 0;
-        if (applyColor)
-        {
-            activeColor = colors[index];
-        }
-    }
-
-    public void SetApplyElevation(bool toggle)
-    {
-        applyElevation = toggle;
-    }
-
-    public void SetBrushSize(float size)
-    {
-        brushSize = (int)size;
-    }
-
-    public void SetRiverMode(int mode)
-    {
-        riverMode = (OptionalToggle)mode;
-    }
-
-    public void ShowUI(bool visible)
-    {
-        hexGrid.ShowUI(visible);
     }
 }
