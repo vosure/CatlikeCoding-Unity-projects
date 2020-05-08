@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class HexGrid : MonoBehaviour
 {
-
     public int chunkCountX = 4, chunkCountZ = 3;
 
     public Color defaultColor = Color.white;
@@ -66,8 +65,7 @@ public class HexGrid : MonoBehaviour
     {
         position = transform.InverseTransformPoint(position);
         HexCoordinates coordinates = HexCoordinates.FromPosition(position);
-        int index =
-            coordinates.X + coordinates.Z * cellCountX + coordinates.Z / 2;
+        int index = coordinates.X + coordinates.Z * cellCountX + coordinates.Z / 2;
         return cells[index];
     }
 
